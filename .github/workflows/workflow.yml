@@ -1,0 +1,19 @@
+name: CI
+
+on: [push, pull_request, workflow_dispatch]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: We always run
+        run: echo "${{ format('refs/heads/{0}', vars.DEV_BRANCH_NAME) }}"
+  deploy_dev:
+    needs: [build]
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == format('refs/heads/{0}', vars.DEV_BRANCH_NAME) }}
+    steps:
+      - name: We sometimes run
+        run: echo "dog"
+
