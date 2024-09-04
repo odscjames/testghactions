@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: We always run
         run: echo "${{ format('refs/heads/{0}', vars.DEV_BRANCH_NAME) }}"
+      - name: Still run
+        run: echo "${{ github.ref }}"        
   deploy_dev:
     needs: [build]
     runs-on: ubuntu-latest
